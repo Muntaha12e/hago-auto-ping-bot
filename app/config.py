@@ -1,6 +1,6 @@
 import os
 from dataclasses import dataclass, field
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from dotenv import load_dotenv
 
@@ -32,6 +32,10 @@ class AppSettings:
     ping_interval: int = field(default_factory=lambda: get_env_int("PING_INTERVAL", 30))
     url: str = field(default_factory=lambda: get_env("HAGO_URL", "https://httpbin.org/post"))
     room_id: str = field(default_factory=lambda: get_env("HAGO_ROOM_ID", "demo-room"))
+    room_token: str = field(default_factory=lambda: os.getenv("HAGO_ROOM_TOKEN", ""))
+    user_id: str = field(default_factory=lambda: os.getenv("HAGO_USER_ID", ""))
+    invite_id: str = field(default_factory=lambda: os.getenv("HAGO_INVITE_ID", ""))
+    owner_id: str = field(default_factory=lambda: os.getenv("HAGO_OWNER_ID", ""))
     max_retries: int = field(default_factory=lambda: get_env_int("MAX_RETRIES", 3))
     backoff_factor: float = field(default_factory=lambda: float(os.getenv("BACKOFF_FACTOR", "2.0")))
     debug: bool = field(default_factory=lambda: get_env_bool("DEBUG", False))
